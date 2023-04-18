@@ -1,0 +1,9 @@
+.--dict-audio-label {
+  display: inline-flex;
+  align-items: center;
+  margin-right: 11px;
+}
+
+.--dict-audio-label-pronounce-type {
+  padding: 0 3px 0 5px;
+}

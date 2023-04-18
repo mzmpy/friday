@@ -1,0 +1,15 @@
+.--dict-sider-vessel {
+  padding: 7px 5px;
+  background: linear-gradient(#eaf6fb, #ffffff);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.--dict-sider-input {
+  padding-bottom: 10px;
+}
+
+.--dict-sider-record {
+  flex-grow: 1;
+}

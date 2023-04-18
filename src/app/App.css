@@ -1,0 +1,4 @@
+.--dict-layout {
+  height: calc(100vh - 1rem);
+  border-radius: 4px;
+}

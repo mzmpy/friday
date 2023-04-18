@@ -1,0 +1,116 @@
+.--dict-content-vessel {
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: linear-gradient(#eef6fb, #f9f9f9);
+  overflow: auto;
+}
+
+/* 滚动条整体 */
+.--dict-content-vessel::-webkit-scrollbar {
+  height: 7px;
+  width: 7px;
+}
+/* 两个滚动条交接处 -- x轴和y轴 */
+.--dict-content-vessel::-webkit-scrollbar-corner {
+  background-color: transparent;
+}
+
+/* 滚动条滑块 */
+.--dict-content-vessel::-webkit-scrollbar-thumb {
+  border-radius: 7px;
+  -webkit-box-shadow: inset 0 0 5px #5e5e5e;
+  background: #a9a9a9;
+}
+
+/* 滚动条轨道 */
+.--dict-content-vessel::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 5px #efefef;
+  border-radius: 7px;
+  background: #ededed;
+}
+
+.--dict-content-head {
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: #10285e;
+}
+
+.--dict-content-head-bottom {
+  height: 1.5px;
+  background: linear-gradient(to right, #cedaef, #e3cfb7);
+}
+
+.--dict-content-body {
+  flex-grow: 1;
+}
+
+.--dict-content-head-known {
+  display: flex;
+  align-items: center;
+}
+
+.--dict-content-head-known-phonetic {
+  padding-left: 11px;
+  color: #ff852e;
+  font-weight: 600;
+}
+
+.--dict-content-body-definition {
+  margin: 20px 10px 0 10px;
+  font-size: 12px;
+}
+
+.--dict-content-body-definition-title {
+  color: #a7a7a7;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.--dict-content-body-definition-item {
+  padding: 10px 0;
+}
+
+.--dict-content-body-translation {
+  margin: 20px 10px 0 10px;
+  font-size: 12px;
+}
+
+.--dict-content-body-translation-title {
+  color: #a7a7a7;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.--dict-content-body-translation-item {
+  padding: 10px 0;
+}
+
+.--dict-content-body-exchange {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin: 20px 10px 0 0;
+  padding: 10px 0 10px 10px;
+  font-size: 14px;
+  background-color: #ebebeb;
+  border-radius: 4px;
+}
+
+.--dict-content-body-exchange-title {
+  color: #a7a7a7;
+  font-weight: 500;
+  margin-right: 9px;
+  margin-bottom: 5px;
+  padding: 3px;
+}
+
+.--dict-content-body-exchange-item {
+  margin-right: 9px;
+  margin-bottom: 5px;
+  padding: 3px;
+  border: 1px dashed #818181;
+  border-radius: 4px;
+  color: #4096ff;
+}

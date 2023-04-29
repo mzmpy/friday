@@ -2,12 +2,11 @@ import React, { StrictMode, useState } from "react";
 import { createRoot } from "react-dom/client";
 import { Layout } from "antd";
 import {
-  MenuFoldOutlined,
   MenuUnfoldOutlined
 } from '@ant-design/icons';
 import DictSider from "./components/DictSider";
 import DictContent from "./components/DictContent";
-import type { Word } from "../types/types.d.ts";
+import type { Word } from "../types/types";
 
 import './App.css';
 
@@ -24,7 +23,7 @@ const App: React.FC = () => {
 
   const onSearch = (event: React.KeyboardEvent<HTMLInputElement>) => {
     const target = event.target as HTMLInputElement;
-    window.sql.queryTest(
+    window.sql.query(
       `SELECT *
       FROM stardict
       WHERE word = $word`,
@@ -42,12 +41,12 @@ const App: React.FC = () => {
       <Sider
         collapsedWidth={48}
         theme="light"
-        collapsible
+        collapsible={!collapsed}
         collapsed={collapsed}
         onCollapse={onCollapse}
-        trigger={collapsed ? <MenuFoldOutlined></MenuFoldOutlined> : <MenuUnfoldOutlined></MenuUnfoldOutlined>}
+        trigger={collapsed ? null : <MenuUnfoldOutlined></MenuUnfoldOutlined>}
       >
-        <DictSider collapsed={collapsed} onPressSearch={onSearch} onActivate={onInputActivate}></DictSider>
+        <DictSider search={word?.word} collapsed={collapsed} onPressSearch={onSearch} onActivate={onInputActivate}></DictSider>
       </Sider>
       <Content>
         <DictContent word={word}></DictContent>

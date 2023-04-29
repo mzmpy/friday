@@ -13,3 +13,46 @@
 .--dict-sider-record {
   flex-grow: 1;
 }
+
+.--dict-sider-menu {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.--dict-sider-menu-item {
+  width: 32px;
+  aspect-ratio: 1 / 1;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition-property: all;
+  transition-duration: 0.5s;
+}
+
+.--dict-sider-menu-item:hover {
+  background-color: #ecf7ff;
+  color: #55acee;
+}
+
+.--dict-sider-menu-item-start {
+  width: 32px;
+  aspect-ratio: 1 / 1;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: auto;
+  background-color: #ffffff;
+  border: 1px solid transparent;
+  transition-property: all;
+  transition-duration: 0.5s;
+}
+
+.--dict-sider-menu-item-start:hover {
+  background-color: #ffffff;
+  border: 1px solid #4096ff;
+}

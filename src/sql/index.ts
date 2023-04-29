@@ -1,7 +1,7 @@
 import sql from "sqlite3";
 import type { sqlite3 } from "sqlite3";
 import path from "path";
-import type { Word } from "../type";
+import type { Word } from "../types/types";
 
 export default class dictDB {
   #db;

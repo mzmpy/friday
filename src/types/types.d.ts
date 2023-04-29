@@ -1,6 +1,15 @@
 declare global {
   interface Window {
-    sql: Record<string, (sql: string, params: Record<string, unknown>) => Promise<Word[]>>
+    sql: SQLMethods;
+    http: HTTPMethods;
+  }
+
+  interface SQLMethods {
+    query: (sql: string, params: Record<string, unknown>) => Promise<Word[]>;
+  }
+
+  interface HTTPMethods {
+    getPronounce: (audio: string, type: AudioType) => Promise<ArrayBuffer|null>
   }
 }
 
@@ -22,6 +31,9 @@ interface Word {
   audio: string;
 }
 
+type AudioType = 0 | 1;
+
 export {
-  Word
+  Word,
+  AudioType
 }

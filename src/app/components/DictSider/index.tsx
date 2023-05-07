@@ -5,6 +5,7 @@ import {
   HomeOutlined,
   UserOutlined
 } from '@ant-design/icons';
+import { useNavigate } from "react-router-dom";
 
 import "./index.css";
 
@@ -17,6 +18,15 @@ interface Iprops {
 
 const DictSider: React.FC<Iprops> = (props) => {
   const [value, setValue] = useState<string>(props.search);
+  const navigate = useNavigate();
+
+  function clickToHome() {
+    navigate("/");
+  }
+
+  function clickToUser() {
+    navigate("/user");
+  }
 
   return (
     <div className="--dict-sider-vessel">
@@ -27,10 +37,10 @@ const DictSider: React.FC<Iprops> = (props) => {
               <div className="--dict-sider-menu-item-start"  onClick={props.onActivate}>
                 <SearchOutlined></SearchOutlined>
               </div>
-              <div className="--dict-sider-menu-item">
+              <div className="--dict-sider-menu-item" onClick={clickToHome}>
                 <HomeOutlined></HomeOutlined>
               </div>
-              <div className="--dict-sider-menu-item">
+              <div className="--dict-sider-menu-item" onClick={clickToUser}>
                 <UserOutlined></UserOutlined>
               </div>
             </div>

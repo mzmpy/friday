@@ -1,4 +1,5 @@
 import React, { StrictMode, useState } from "react";
+import { createHashRouter, RouterProvider, Outlet, useNavigate } from "react-router-dom";
 import { createRoot } from "react-dom/client";
 import { Layout } from "antd";
 import {
@@ -13,8 +14,9 @@ import './App.css';
 const { Sider, Content } = Layout;
 
 const App: React.FC = () => {
-  const [collapsed, setCollapsed] = useState(false);
+  const [collapsed, setCollapsed] = useState(true);
   const [word, setWord] = useState<Word>(null);
+  const navigate = useNavigate();
   
   const onCollapse = () => setCollapsed(!collapsed);
   const onInputActivate = () => {
@@ -33,6 +35,11 @@ const App: React.FC = () => {
     ).then((res) => {
       console.log(res);
       setWord(res[0]);
+
+      navigate("/dict", {
+        replace: false,
+        state: { word: res[0] }
+      });
     });
   };
 
@@ -49,7 +56,7 @@ const App: React.FC = () => {
         <DictSider search={word?.word} collapsed={collapsed} onPressSearch={onSearch} onActivate={onInputActivate}></DictSider>
       </Sider>
       <Content>
-        <DictContent word={word}></DictContent>
+        <Outlet></Outlet>
       </Content>
     </Layout>
   );
@@ -60,9 +67,30 @@ export default function createApp() {
     document.getElementById('app')
   );
 
+  const router = createHashRouter([
+    {
+      element: <App></App>,
+      path: "/",
+      children: [
+        {
+          element: <DictContent></DictContent>,
+          path: "dict"
+        },
+        {
+          element: <div>User</div>,
+          path: "user"
+        },
+        {
+          element: <div>Home</div>,
+          index: true
+        }
+      ]
+    }
+  ]);
+
   app.render(
     <StrictMode>
-      <App></App>
+      <RouterProvider router={router}></RouterProvider>
     </StrictMode>
   );
 }

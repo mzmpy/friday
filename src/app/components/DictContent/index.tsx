@@ -2,10 +2,11 @@ import React from "react";
 import Audio from "../CostomAudio";
 import WordTag from "../WordTag";
 import type { Word } from "../../../types/types";
+import { useLocation } from "react-router-dom";
 
 import "./index.css";
 
-interface Iprops {
+interface LocationState {
   word: Word;
 }
 
@@ -21,30 +22,32 @@ const fields: Record<string, string> = {
   "1": "lemma变换形式"
 };
 
-const DictContent: React.FC<Iprops> = (props) => {
+const DictContent: React.FC = () => {
+  const { state }: { state: LocationState } = useLocation();
+
   return (
     <div className="--dict-content-vessel">
-      {props.word?.word && (
+      {state.word?.word && (
         <>
-          <div className="--dict-content-head">{props.word?.word}</div>
+          <div className="--dict-content-head">{state.word?.word}</div>
           <div className="--dict-content-head-known">
-            <Audio type={0} audio={props.word?.word}></Audio>
-            <Audio type={1} audio={props.word?.word}></Audio>
-            <span className="--dict-content-head-known-phonetic">{"音标：/" + (props.word?.phonetic || "") + "/"}</span>
+            <Audio type={0} audio={state.word?.word}></Audio>
+            <Audio type={1} audio={state.word?.word}></Audio>
+            <span className="--dict-content-head-known-phonetic">{"音标：/" + (state.word?.phonetic || "") + "/"}</span>
           </div>
           <div className="--dict-content-head-bottom"></div>
           <div className="--dict-content-body">
             {
-              props.word?.tag && (
-                <WordTag tags={props.word?.tag.split(' ')}></WordTag>
+              state.word?.tag && (
+                <WordTag tags={state.word?.tag.split(' ')}></WordTag>
               )
             }
             {
-              props.word?.definition && (
+              state.word?.definition && (
                 <div className="--dict-content-body-definition">
                   <div className="--dict-content-body-definition-title">原义</div>
                   {
-                    props.word?.definition?.split("\n").map((item: string) => {
+                    state.word?.definition?.split("\n").map((item: string) => {
                       return (
                         <div key={item} className="--dict-content-body-definition-item">{item}</div>
                       );
@@ -54,11 +57,11 @@ const DictContent: React.FC<Iprops> = (props) => {
               )
             }
             {
-              props.word?.translation && (
+              state.word?.translation && (
                 <div className="--dict-content-body-translation">
                   <div className="--dict-content-body-translation-title">释义</div>
                   {
-                    props.word?.translation?.split("\n").map((item: string) => {
+                    state.word?.translation?.split("\n").map((item: string) => {
                       return (
                         <div key={item} className="--dict-content-body-translation-item">{item}</div>
                       );
@@ -68,11 +71,11 @@ const DictContent: React.FC<Iprops> = (props) => {
               )
             }
             {
-              props.word?.exchange && (
+              state.word?.exchange && (
                 <div className="--dict-content-body-exchange">
                   <div className="--dict-content-body-exchange-title">时态：</div>
                   {
-                    props.word?.exchange?.split("/").map((item: string) => {
+                    state.word?.exchange?.split("/").map((item: string) => {
                       const [key, exch] = item.split(":");
                       return (
                         <span key={item} className="--dict-content-body-exchange-item">{`${fields[key]}/${exch}`}</span>

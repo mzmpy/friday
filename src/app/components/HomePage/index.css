@@ -1,0 +1,32 @@
+.--home-content-vessel {
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: linear-gradient(#eef6fb, #f9f9f9);
+  overflow: auto;
+}
+
+/* 滚动条整体 */
+.--home-content-vessel::-webkit-scrollbar {
+  height: 7px;
+  width: 7px;
+}
+/* 两个滚动条交接处 -- x轴和y轴 */
+.--home-content-vessel::-webkit-scrollbar-corner {
+  background-color: transparent;
+}
+
+/* 滚动条滑块 */
+.--home-content-vessel::-webkit-scrollbar-thumb {
+  border-radius: 7px;
+  -webkit-box-shadow: inset 0 0 5px #5e5e5e;
+  background: #a9a9a9;
+}
+
+/* 滚动条轨道 */
+.--home-content-vessel::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 5px #efefef;
+  border-radius: 7px;
+  background: #ededed;
+}

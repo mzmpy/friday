@@ -2,3 +2,19 @@
   height: calc(100vh - 1rem);
   border-radius: 4px;
 }
+
+::-webkit-scrollbar {
+  width: 5px;
+  height: 8px;
+  background-color: #fff;
+  display: none;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #fff;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #ACB1BF;
+  border-radius: 4px;
+}

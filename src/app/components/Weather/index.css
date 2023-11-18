@@ -1,0 +1,76 @@
+.--weather-vessel {
+  border-radius: 8px;
+  box-shadow: 0 0 15px 1px #dde6ed;
+  padding: 15px;
+}
+
+.--weather-title {
+  display: flex;
+  cursor: pointer;
+  user-select: none;
+  flex-direction: column;
+}
+
+.--weather-title-profile {
+  display: flex;
+  justify-content: start;
+  font-size: 24px;
+  color: grey;
+}
+
+.--weather-title-profile-city {
+  margin-right: 15px;
+  color: #4096ff;
+}
+
+.--weather-title-profile-city:hover {
+  color: #ffa41b;
+}
+
+.--weather-title-profile-city-label {
+  font-size: 24px;
+  color: #4096ff;
+}
+
+.--weather-title-profile-city-label:hover {
+  color: #ffa41b;
+}
+
+.--weather-title-profile-icon {
+  margin-right: 5px;
+}
+
+.--weather-title-profile-discription {
+  margin-right: 5px;
+  display: flex;
+  flex-direction: column;
+  font-size: 12px;
+}
+
+.--weather-title-other {
+  display: flex;
+  justify-content: start;
+  font-size: 12px;
+  padding: 10px;
+}
+
+.--weather-title-other-item {
+  display: flex;
+  align-items: center;
+  margin-right: 7px;
+  background-color: #e4eaeb;
+  border-radius: 8px;
+  padding: 5px;
+}
+
+.--weather-title-other-item-key {
+  display: inline-block;
+  color: black;
+}
+
+.--weather-title-other-item-value {
+  display: inline-block;
+  color: #4096ff;
+  margin: 0 5px;
+  font-size: 15px;
+}

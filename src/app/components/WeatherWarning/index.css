@@ -1,0 +1,23 @@
+.--weather-warning {
+  overflow: hidden;
+  width: 200px;
+  height: 225px;
+}
+
+.--weather-warning-card {
+  height: 225px;
+  display: inline-flex !important;
+  flex-direction: column;
+}
+
+.--weather-warning-card-title {
+  font-weight: bold;
+  padding: 0 24px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.dot-class li button {
+  background-color: #9aaebd !important;
+}

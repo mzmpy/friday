@@ -8,6 +8,7 @@ import {
 import DictSider from "./components/DictSider";
 import DictContent from "./components/DictContent";
 import type { Word } from "../types/types";
+import HomePage from "./components/HomePage";
 
 import './App.css';
 
@@ -81,7 +82,7 @@ export default function createApp() {
           path: "user"
         },
         {
-          element: <div>Home</div>,
+          element: <HomePage></HomePage>,
           index: true
         }
       ]

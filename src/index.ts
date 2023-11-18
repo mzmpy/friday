@@ -1,14 +1,9 @@
-import { app, BrowserWindow, ipcMain, Tray, Menu } from "electron";
-import dictDB from "./sql/index";
+import { app, BrowserWindow, Tray, Menu } from "electron";
 import path from "path";
-import { getPronounce } from "./http";
-import type { AudioType } from "./types/types";
+import { ipcMainHandlers } from "./ipc";
 
 declare const MAIN_WINDOW_WEBPACK_ENTRY: string;
 declare const MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY: string;
-
-const db = new dictDB("./stardict.db");
-db.init();
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if(require('electron-squirrel-startup')) {
@@ -76,22 +71,7 @@ const createWindow = (): void => {
     mainWindow = null;
   })
 
-  ipcMain.handle("query", async (event: Electron.IpcMainInvokeEvent, sql: string, params: Record<string, unknown>) => {
-    console.log("--------------------------***--------------------------");
-    console.log(`ipcMain handle [query] from "${__filename}": frameId=${event.frameId}, processId=${event.processId}`);
-
-    return await db.queryAll(
-      sql,
-      params
-    );
-  });
-
-  ipcMain.handle("getPronounce", async (event: Electron.IpcMainInvokeEvent, audio: string, type: AudioType) => {
-    console.log("--------------------------***--------------------------");
-    console.log(`ipcMain handle [getPronounce] from "${__filename}": frameId=${event.frameId}, processId=${event.processId}`);
-
-    return await getPronounce(audio, type);
-  })
+  ipcMainHandlers();
 };
 
 // This method will be called when Electron has finished

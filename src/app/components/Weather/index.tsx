@@ -6,7 +6,7 @@ import WeatherWarningFC from "../WeatherWarning";
 
 import "./index.css";
 
-const Weather: React.FC = () => {
+const WeatherFC: React.FC = () => {
   const [city, setCity] = useState<string>("广州市");
   const [oldCity, setOldCity] = useState<string>(city);
   const [weather, setWeather] = useState<NowWeather>(null);
@@ -206,4 +206,4 @@ const pushPressure = (value: string, other: WeatherOther[]) => {
     : null;
 };
 
-export default Weather;
+export default WeatherFC;

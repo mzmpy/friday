@@ -8,7 +8,7 @@ interface Iprops {
   warnings: WeatherWarning[]
 }
 
-const WeatherWarning: React.FC<Iprops> = (props) => {
+const WeatherWarningFC: React.FC<Iprops> = (props) => {
   return (
     <div className="--weather-warning" onClick={(ev) => ev.stopPropagation()} onDoubleClick={(ev) => ev.stopPropagation()}>
       <Carousel autoplay dots={{ className: "dot-class" }}>
@@ -36,4 +36,4 @@ const WeatherWarning: React.FC<Iprops> = (props) => {
   );
 };
 
-export default WeatherWarning;
+export default WeatherWarningFC;

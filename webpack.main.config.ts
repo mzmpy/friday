@@ -20,7 +20,8 @@ export const mainConfig: Configuration = {
     new CopyPlugin({
       patterns: [
         { from: "./stardict.db", to: "./stardict.db" },
-        { from: "./src/assets/favicon.png", to: "./assets/favicon.png" }
+        { from: "./src/assets/favicon.png", to: "./assets/favicon.png" },
+        { from: "./src/assets/faviconTemplate.png", to: "./assets/faviconTemplate.png" }
       ]
     })
   ],

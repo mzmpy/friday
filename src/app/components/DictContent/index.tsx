@@ -45,7 +45,7 @@ const DictContent: React.FC = () => {
             {
               state.word?.definition && (
                 <div className="--dict-content-body-definition">
-                  <div className="--dict-content-body-definition-title">原义</div>
+                  <div className="--dict-content-body-definition-title">释义</div>
                   {
                     state.word?.definition?.split("\n").map((item: string) => {
                       return (
@@ -59,7 +59,7 @@ const DictContent: React.FC = () => {
             {
               state.word?.translation && (
                 <div className="--dict-content-body-translation">
-                  <div className="--dict-content-body-translation-title">释义</div>
+                  <div className="--dict-content-body-translation-title">译义</div>
                   {
                     state.word?.translation?.split("\n").map((item: string) => {
                       return (

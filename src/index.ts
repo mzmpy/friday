@@ -6,7 +6,7 @@ declare const MAIN_WINDOW_WEBPACK_ENTRY: string;
 declare const MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY: string;
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
-if(require('electron-squirrel-startup')) {
+if(require("electron-squirrel-startup")) {
   app.quit();
 }
 
@@ -81,11 +81,11 @@ app.whenReady()
     createWindow();
   });
 
-app.setName('friday');
+app.setName("friday");
 app.dock.setIcon(icon);
 
-app.on('window-all-closed', () => {
-  if(process.platform !== 'darwin') {
+app.on("window-all-closed", () => {
+  if(process.platform !== "darwin") {
     app.quit();
   }
 });
@@ -100,7 +100,7 @@ app.on("activate", () => {
   }
 });
 
-app.on('before-quit', () => {
+app.on("before-quit", () => {
   quiting = true;
 });
 

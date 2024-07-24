@@ -1,14 +1,9 @@
 import React from "react";
-import Audio from "../CostomAudio";
+import Audio from "../CustomAudio";
 import WordTag from "../WordTag";
-import type { Word } from "../../../types/types";
 import { useLocation } from "react-router-dom";
 
 import "./index.css";
-
-interface LocationState {
-  word: Word;
-}
 
 const fields: Record<string, string> = {
   "p": "过去式",

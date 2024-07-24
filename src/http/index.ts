@@ -1,5 +1,3 @@
-import type { AudioType, CityInfo, Weather, SevereWeather } from "../types/types";
-
 const meta = {
   key: "fdf2e18685834f0ebb0b8892e351a846"
 };

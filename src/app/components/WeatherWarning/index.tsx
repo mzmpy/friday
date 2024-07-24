@@ -1,12 +1,7 @@
 import React from "react";
-import type { WeatherWarning } from "../../../types/types";
 import { Carousel, Card, Tooltip } from "antd";
 
 import "./index.css";
-
-interface Iprops {
-  warnings: WeatherWarning[]
-}
 
 const WeatherWarningFC: React.FC<Iprops> = (props) => {
   return (

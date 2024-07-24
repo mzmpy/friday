@@ -7,7 +7,6 @@ import {
 } from '@ant-design/icons';
 import DictSider from "./components/DictSider";
 import DictContent from "./components/DictContent";
-import type { Word } from "../types/types";
 import HomePage from "./components/HomePage";
 
 import './App.css';

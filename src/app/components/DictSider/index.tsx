@@ -10,13 +10,6 @@ import { useNavigate } from "react-router-dom";
 
 import "./index.css";
 
-interface Iprops {
-  search: string;
-  collapsed: boolean;
-  onPressSearch: (event: React.KeyboardEvent<HTMLInputElement>) => void;
-  onActivate: () => void;
-}
-
 const DictSider: React.FC<Iprops> = (props) => {
   const [value, setValue] = useState<string>(props.search);
   const navigate = useNavigate();

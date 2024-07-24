@@ -1,14 +1,8 @@
 import React from "react";
 import Icon from "@ant-design/icons";
 import AudioSvg from "../../../assets/dict/audio.svg";
-import type { AudioType } from "../../../types/types";
 
 import "./index.css";
-
-interface Iprops {
-  type: AudioType;
-  audio: string;
-}
 
 const CustomAudio: React.FC<Iprops> = (props) => {
   const onPronounce = () => {

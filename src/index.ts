@@ -1,6 +1,6 @@
 import { app, BrowserWindow, Tray, Menu, nativeImage } from "electron";
 import path from "path";
-import { ipcMainHandlers } from "./ipc";
+import { runIpcMainHandlers } from "./ipc";
 
 declare const MAIN_WINDOW_WEBPACK_ENTRY: string;
 declare const MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY: string;
@@ -75,7 +75,7 @@ app.whenReady()
     const ctxMenu = Menu.buildFromTemplate(trayMenuTemplate);
     appTray.setContextMenu(ctxMenu);
 
-    ipcMainHandlers();
+    runIpcMainHandlers();
   })
   .then(() => {
     createWindow();

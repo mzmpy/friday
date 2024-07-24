@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
 import "qweather-icons/font/qweather-icons.css";
-import type { Weather, NowWeather, WeatherOther, WeatherWarning } from "../../../types/types";
 import { Input, InputRef, Badge, Popover } from "antd";
 import WeatherWarningFC from "../WeatherWarning";
 

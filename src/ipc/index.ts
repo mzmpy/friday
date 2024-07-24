@@ -1,12 +1,11 @@
 import { ipcMain, shell } from "electron";
 import dictDB from "../sql/index";
 import { getPronounce, getNowWeather, getCityId, getSevereWeather } from "../http";
-import type { AudioType } from "../types/types";
 
 const db = new dictDB("./stardict.db");
 db.init();
 
-export function ipcMainHandlers() {
+export function runIpcMainHandlers() {
   ipcMain.handle("query", async (event: Electron.IpcMainInvokeEvent, sql: string, params: Record<string, unknown>) => {
     console.log("--------------------------***--------------------------");
     console.log(`ipcMain handle [query] from "${__filename}": frameId=${event.frameId}, processId=${event.processId}`);

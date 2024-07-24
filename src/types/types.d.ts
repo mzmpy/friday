@@ -1,3 +1,13 @@
+declare module "*.svg" {
+  import * as React from "react";
+
+  const SVGComponent: React.FunctionComponent<
+    React.SVGProps<SVGSVGElement> & { title?: string }
+  >
+
+  export default SVGComponent
+}
+
 interface Word {
   id: number;
   word: string;
@@ -18,6 +28,8 @@ interface Word {
 
 type AudioType = 0 | 1;
 
+/*******************************************************/
+
 interface CityInfo {
   code: string;
   location: Location[];
@@ -27,6 +39,13 @@ interface Location {
   name: string;
   id: string;
   [key: string]: string;
+}
+
+/*******************************************************/
+
+interface Refer {
+  license: Array<string> | null;
+  sources: Array<string> | null;
 }
 
 interface BasicWeather {
@@ -39,6 +58,8 @@ interface BasicWeather {
 interface Weather extends BasicWeather {
   now: NowWeather;
 }
+
+type NowWeather = Record<string, string>;
 
 interface SevereWeather extends BasicWeather {
   warning: WeatherWarning[]
@@ -63,7 +84,7 @@ interface WeatherWarning {
   related: string | null;
 }
 
-enum WarningLevel {
+declare enum WarningLevel {
   White = '白色',
   Blue = '蓝色',
   Green = '绿色',
@@ -73,27 +94,8 @@ enum WarningLevel {
   Black = '黑色'
 }
 
-interface Refer {
-  license: Array<string> | null;
-  sources: Array<string> | null;
-}
-
-type NowWeather = Record<string, string>;
-
 interface WeatherOther {
   key: string;
   value: string;
   Unit: () => JSX.Element;
-}
-
-export {
-  Word,
-  AudioType,
-  CityInfo,
-  Weather,
-  NowWeather,
-  WeatherOther,
-  SevereWeather,
-  WeatherWarning,
-  WarningLevel
 }

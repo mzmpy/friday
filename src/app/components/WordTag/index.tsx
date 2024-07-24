@@ -4,10 +4,6 @@ import { TagOutlined } from "@ant-design/icons";
 
 import "./index.css";
 
-interface Iprops {
-  tags?: string[];
-}
-
 const fields: Record<string, string> = {
   "zk": "中考",
   "gk": "高考",

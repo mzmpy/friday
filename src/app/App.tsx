@@ -8,6 +8,7 @@ import {
 import DictSider from "./components/DictSider";
 import DictContent from "./components/DictContent";
 import HomePage from "./components/HomePage";
+import MDXEditorPage from "./components/MDXEditor";
 
 import './App.css';
 
@@ -75,6 +76,10 @@ export default function createApp() {
         {
           element: <DictContent></DictContent>,
           path: "dict"
+        },
+        {
+          element: <MDXEditorPage></MDXEditorPage>,
+          path: "editor"
         },
         {
           element: <div>User</div>,

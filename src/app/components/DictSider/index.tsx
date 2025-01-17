@@ -4,7 +4,8 @@ import type { InputRef } from "antd";
 import {
   SearchOutlined,
   HomeOutlined,
-  UserOutlined
+  UserOutlined,
+  CodeOutlined
 } from '@ant-design/icons';
 import { useNavigate } from "react-router-dom";
 
@@ -23,19 +24,26 @@ const DictSider: React.FC<Iprops> = (props) => {
     navigate("/user");
   }
 
+  function clickToEditor() {
+    navigate("/editor");
+  }
+
   return (
     <div className="--dict-sider-vessel">
       {
         props.collapsed
           ? (
             <div className="--dict-sider-menu">
-              <div className="--dict-sider-menu-item-start"  onClick={props.onActivate}>
+              <div className="--dict-sider-menu-item --dict-sider-menu-item-search"  onClick={props.onActivate}>
                 <SearchOutlined></SearchOutlined>
+              </div>
+              <div className="--dict-sider-menu-item" onClick={clickToEditor}>
+                <CodeOutlined></CodeOutlined>
               </div>
               <div className="--dict-sider-menu-item" onClick={clickToHome}>
                 <HomeOutlined></HomeOutlined>
               </div>
-              <div className="--dict-sider-menu-item" onClick={clickToUser}>
+              <div className="--dict-sider-menu-item --dict-sider-menu-item-end" onClick={clickToUser}>
                 <UserOutlined></UserOutlined>
               </div>
             </div>

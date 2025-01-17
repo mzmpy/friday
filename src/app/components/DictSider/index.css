@@ -18,7 +18,7 @@
   flex-grow: 1;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
+  justify-content: flex-start;
   align-items: center;
 }
 
@@ -38,21 +38,16 @@
   color: #55acee;
 }
 
-.--dict-sider-menu-item-start {
-  width: 32px;
-  aspect-ratio: 1 / 1;
-  border-radius: 8px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: auto;
+.--dict-sider-menu-item-search {
   background-color: #ffffff;
   border: 1px solid transparent;
-  transition-property: all;
-  transition-duration: 0.5s;
 }
 
-.--dict-sider-menu-item-start:hover {
+.--dict-sider-menu-item-search:hover {
   background-color: #ffffff;
   border: 1px solid #4096ff;
+}
+
+.--dict-sider-menu-item-end {
+  margin-top: auto;
 }

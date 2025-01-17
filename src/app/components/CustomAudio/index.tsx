@@ -1,6 +1,6 @@
 import React from "react";
 import Icon from "@ant-design/icons";
-import AudioSvg from "../../../assets/dict/audio.svg";
+import AudioSvg from "@/assets/dict/audio.svg";
 
 import "./index.css";
 

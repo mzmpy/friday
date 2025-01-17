@@ -32,4 +32,19 @@ declare module "@components/CustomAudio" {
   }
 }
 
+declare module "@/esbuild/plugins/esbuildVirtualFileSystem" {
+  interface VFileOptions {
+    fsTree: VFileTree[];
+  }
+
+  interface VFileTree {
+    name: string;
+    resolveDir: string;
+    absPath: string;
+    isFile: boolean;
+    isDir: boolean;
+    ctx: string|VFileTree[];
+  }
+}
+
 export {}

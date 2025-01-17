@@ -1,6 +1,12 @@
 import { ipcMain, shell } from "electron";
 import dictDB from "../sql/index";
-import { getPronounce, getNowWeather, getCityId, getSevereWeather } from "../http";
+import {
+  getPronounce,
+  getNowWeather,
+  getCityId,
+  getSevereWeather
+} from "../http";
+import { useMDX } from "@/esbuild";
 
 const db = new dictDB("./stardict.db");
 db.init();
@@ -44,5 +50,13 @@ export function runIpcMainHandlers() {
     console.log(`ipcMain handle [openExternalWeatherLink] from "${__filename}": frameId=${event.frameId}, processId=${event.processId}`);
 
     shell.openExternal(link);
+  });
+
+  ipcMain.handle("compileMDX", async (event: Electron.IpcMainInvokeEvent) => {
+    console.log("--------------------------***--------------------------");
+    console.log(`ipcMain handle [compileMDX] from "${__filename}": frameId=${event.frameId}, processId=${event.processId}`);
+    const ctx = await useMDX();
+
+    return JSON.stringify(ctx);
   });
 }

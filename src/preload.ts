@@ -15,5 +15,6 @@ contextBridge.exposeInMainWorld("http", {
 contextBridge.exposeInMainWorld("utils", {
   openExternalWeatherLink: (link: string): void => {
     ipcRenderer.invoke("openExternalWeatherLink", link);
-  }
+  },
+  compileMDX: (): Promise<string> => ipcRenderer.invoke("compileMDX")
 });

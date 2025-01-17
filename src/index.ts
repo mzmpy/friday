@@ -1,9 +1,19 @@
 import { app, BrowserWindow, Tray, Menu, nativeImage } from "electron";
 import path from "path";
 import { runIpcMainHandlers } from "./ipc";
+import * as esbuild from "esbuild";
 
-declare const MAIN_WINDOW_WEBPACK_ENTRY: string;
-declare const MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY: string;
+const ctx = esbuild.buildSync({
+  stdin: {
+    contents: `let val: any = 43;`,
+    resolveDir: "./src",
+    sourcefile: "demo.ts",
+    loader: "ts"
+  },
+  write: false,
+  format: "esm"
+});
+console.log("=== ctx ===", ctx);
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if(require("electron-squirrel-startup")) {
@@ -34,7 +44,7 @@ const createWindow = (): void => {
   mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY);
 
   // Open the DevTools.
-  // mainWindow.webContents.openDevTools();
+  mainWindow.webContents.openDevTools();
 
   mainWindow.on("close", (ev) => {
     if(quiting) {

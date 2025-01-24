@@ -1,17 +1,16 @@
-import { app, BrowserWindow, Tray, Menu } from "electron";
+import { app, BrowserWindow, Tray, Menu, nativeImage } from "electron";
 import path from "path";
 import { runIpcMainHandlers } from "./ipc";
 
-declare const MAIN_WINDOW_WEBPACK_ENTRY: string;
-declare const MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY: string;
-
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
-if(require('electron-squirrel-startup')) {
+if(require("electron-squirrel-startup")) {
   app.quit();
 }
 
+let quiting: boolean = false;
 let mainWindow: BrowserWindow;
 let appTray: Tray;
+const icon = nativeImage.createFromPath(path.resolve(__dirname, "./assets/favicon.png"))
 
 const createWindow = (): void => {
   // Menu.setApplicationMenu(null);
@@ -20,7 +19,7 @@ const createWindow = (): void => {
   mainWindow = new BrowserWindow({
     height: 600,
     width: 900,
-    icon: path.resolve(__dirname, "./assets/favicon.png"),
+    icon: icon,
     webPreferences: {
       preload: MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY,
     },
@@ -32,58 +31,58 @@ const createWindow = (): void => {
   mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY);
 
   // Open the DevTools.
-  // mainWindow.webContents.openDevTools();
-
-  const trayMenuTemplate = [
-    {
-      label: "词典界面",
-      click: () => {
-        mainWindow.show();
-      }
-    },
-    {
-      label: "退出",
-      click: () => {
-        mainWindow.destroy();
-      }
-    }
-  ];
-
-  appTray = new Tray(path.resolve(__dirname, "./assets/favicon.png"));
-
-  appTray.setToolTip("friday");
-  
-  const ctxMenu = Menu.buildFromTemplate(trayMenuTemplate);
-  appTray.setContextMenu(ctxMenu);
-
-  appTray.on('double-click', () => {
-    mainWindow.isVisible() ? mainWindow.hide() : mainWindow.show();
-    mainWindow.isVisible() ? mainWindow.setSkipTaskbar(false) : mainWindow.setSkipTaskbar(true);
-  });
+  mainWindow.webContents.openDevTools();
 
   mainWindow.on("close", (ev) => {
-    ev.preventDefault();
-    mainWindow.hide();
-    mainWindow.setSkipTaskbar(true);
+    if(quiting) {
+      mainWindow.destroy();
+      mainWindow = null;
+    } else {
+      ev.preventDefault();
+      mainWindow.hide();
+    }
   });
-
-  mainWindow.on("closed", () => {
-    mainWindow = null;
-  })
-
-  runIpcMainHandlers();
 };
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
-app.on("ready", createWindow);
+app.whenReady()
+  .then(() => {
+    const trayMenuTemplate = [
+      {
+        label: "词典界面",
+        click: () => {
+          if(mainWindow) mainWindow.show();
+          else createWindow();
+        }
+      },
+      {
+        label: "退出",
+        click: () => {
+          app.quit();
+        }
+      }
+    ];
 
-// Quit when all windows are closed, except on macOS. There, it's common
-// for applications and their menu bar to stay active until the user quits
-// explicitly with Cmd + Q.
+    appTray = new Tray(nativeImage.createFromPath(path.resolve(__dirname, "./assets/faviconTemplate.png")));
+
+    appTray.setToolTip("friday");
+    
+    const ctxMenu = Menu.buildFromTemplate(trayMenuTemplate);
+    appTray.setContextMenu(ctxMenu);
+
+    runIpcMainHandlers();
+  })
+  .then(() => {
+    createWindow();
+  });
+
+app.setName("friday");
+app.dock.setIcon(icon);
+
 app.on("window-all-closed", () => {
-  if(process.platform !== 'darwin') {
+  if(process.platform !== "darwin") {
     app.quit();
   }
 });
@@ -91,9 +90,15 @@ app.on("window-all-closed", () => {
 app.on("activate", () => {
   // On OS X it's common to re-create a window in the app when the
   // dock icon is clicked and there are no other windows open.
-  if(BrowserWindow.getAllWindows().length === 0 || mainWindow === null) {
+  if(BrowserWindow.getAllWindows().length === 0) {
     createWindow();
+  } else if(mainWindow) {
+    mainWindow.show();
   }
+});
+
+app.on("before-quit", () => {
+  quiting = true;
 });
 
 // In this file you can include the rest of your app's specific main process

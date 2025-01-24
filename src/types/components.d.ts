@@ -1,3 +1,6 @@
+import type { VFile } from "vfile";
+import type { BuildResult } from "esbuild";
+
 declare module "@components/DictContent" {
   interface LocationState {
     word: Word;
@@ -32,18 +35,13 @@ declare module "@components/CustomAudio" {
   }
 }
 
+declare module "@components/MDXEditor" {
+  type CompileResult = BuildResult;
+}
+
 declare module "@/esbuild/plugins/esbuildVirtualFileSystem" {
   interface VFileOptions {
-    fsTree: VFileTree[];
-  }
-
-  interface VFileTree {
-    name: string;
-    resolveDir: string;
-    absPath: string;
-    isFile: boolean;
-    isDir: boolean;
-    ctx: string|VFileTree[];
+    files: VFile[];
   }
 }
 

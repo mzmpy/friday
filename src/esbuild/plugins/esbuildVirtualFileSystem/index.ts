@@ -3,12 +3,13 @@ import type { Plugin } from "esbuild";
 import { createFormatAwareProcessors } from "@mdx-js/mdx/internal-create-format-aware-processors";
 import remarkGfm from "remark-gfm";
 import remarkMath from "remark-math";
+import { VFile } from "vfile";
 
 export default (options: VFileOptions): Plugin => {
   return {
     name: "virtual-file-system",
     setup(build) {
-      build.onResolve({ filter: /\.js$/ }, (args) => {
+      build.onResolve({ filter: /\.jsx?$/ }, (args) => {
         const importPath = path.resolve(args.resolveDir, args.path);
         console.log("=== esbuild plugin [vfs resolve] ===", args, importPath);
 
@@ -21,31 +22,22 @@ export default (options: VFileOptions): Plugin => {
         };
       });
 
-      build.onLoad({ filter: /\.js$/, namespace: "VFS" }, (args) => {
-        console.log("=== esbuild plugin [vfs load] ===", args);
+      build.onLoad({ filter: /\.jsx?$/, namespace: "VFS" }, (args) => {
+        const vf = findFile(options.files, args.path);
+        console.log("=== esbuild plugin [vfs load] ===", args, vf);
 
-        const findFile = (fsTree: any[]) => {
-          let res: any;
-          for(const fd of fsTree) {
-            if(fd.absPath === args.path) res = fd.ctx;
-            else if(fd.ctx instanceof Array) {
-              res = findFile(fd.ctx);
-            }
-          }
-
-          return res;
-        };
+        if(!vf) return;
 
         return {
-          contents: findFile(options.fsTree),
-          loader: "jsx",
+          contents: vf.value,
+          loader: path.extname(args.path).slice(1) as "js"|"jsx",
           resolveDir: args.pluginData.resolveDir
         }
       });
 
       build.onResolve({ filter: /\.mdx$/ }, (args) => {
         const importPath = path.resolve(args.resolveDir, args.path);
-        console.log("=== esbuild plugin [vfs resolve] ===", args);
+        console.log("=== esbuild plugin [vfs mdx resolve] ===", args);
 
         return {
           path: importPath,
@@ -57,30 +49,30 @@ export default (options: VFileOptions): Plugin => {
       });
 
       build.onLoad({ filter: /\.mdx$/, namespace: "VFS" }, async (args) => {
-        const findFile = (fsTree: any[]) => {
-          let res: any;
-          for(const fd of fsTree) {
-            console.log("=== find file ===", fd.absPath, args.path, fd.absPath === args.path);
-            if(fd.absPath === args.path) res = fd.ctx;
-            else if(fd.ctx instanceof Array) {
-              res = findFile(fd.ctx);
-            }
-          }
-
-          return res;
-        };
         const {extnames, process} = createFormatAwareProcessors({
+          jsxImportSource: "@mdx-js/react",
           remarkPlugins: [remarkGfm, remarkMath],
         });
-        const file = await process(findFile(options.fsTree));
-        console.log("=== esbuild plugin [vfs resolve] ===", file, extnames);
+        const vf = findFile(options.files, args.path);
+        if(!vf) return;
+
+        const compiled = await process(vf.value);
+        console.log("=== esbuild plugin [vfs mdx load] ===", vf, compiled);
 
         return {
-          contents: file.value,
+          contents: compiled.value,
           resolveDir: args.pluginData.resolveDir,
-          loader: "jsx"
+          loader: "js"
         }
       });
     },
   };
+};
+
+const findFile = (fileList: VFile[], _path: string): VFile|undefined => {
+  for(const fd of fileList) {
+    if(fd.path === _path) return fd;
+  }
+
+  return;
 };

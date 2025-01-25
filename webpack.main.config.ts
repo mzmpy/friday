@@ -27,10 +27,11 @@ export const mainConfig: Configuration = {
         { from: "./stardict.db", to: "./stardict.db" },
         { from: "./src/assets/favicon.png", to: "./assets/favicon.png" },
         { from: "./src/assets/faviconTemplate.png", to: "./assets/faviconTemplate.png" },
-        { from: "node_modules/esbuild/**/*", to: "./" }
+        { from: "node_modules/esbuild/**/*", to: "./" },
+        { from: "node_modules/@esbuild/**/*", to: "./" }
       ]
     })
   ],
   // without "nock", "mock-aws-s3", "aws-sdk" as externals will cause error when make
-  externals: ["nock", "mock-aws-s3", "aws-sdk", "esbuild"]
+  externals: ["nock", "mock-aws-s3", "aws-sdk", "esbuild", "@esbuild"]
 };
